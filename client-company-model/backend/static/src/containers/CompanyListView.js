@@ -14,12 +14,18 @@ class CompanyList extends React.Component {
   }
 
   componentDidMount() {
-    axios.get("http://127.0.0.1:8000/api/").then(res => {
-      this.setState({
-        companies: res.data
+    const token = localStorage.getItem("token");
+    console.log(token);
+    axios
+      .get("http://127.0.0.1:8000/api/", {
+        headers: { Authorization: `Token ${token}` }
+      })
+      .then(res => {
+        this.setState({
+          companies: res.data
+        });
+        console.log(res.data);
       });
-      console.log(res.data);
-    });
   }
 
   render() {

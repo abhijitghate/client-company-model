@@ -6,6 +6,9 @@ import CompanyDetail from "./containers/CompanyDetailView";
 import SearchReasult from "./components/SearchResult";
 import Login from "./containers/Login";
 import Signup from "./containers/Signup";
+import ResetPassword from "./containers/ResetPassword";
+import ConfirmPassword from "./containers/ConfirmPassword";
+
 
 const BaseRouter = () => (
   <div>
@@ -18,6 +21,9 @@ const BaseRouter = () => (
     ></Route>
     <Route exact path="/login/" component={Login}></Route>
     <Route exact path="/signup/" component={Signup}></Route>
+    <Route exact path="/resetpassword/" component={ResetPassword}></Route>
+    <Route exact path="/confirmpassword/" component={ConfirmPassword}></Route>
+
   </div>
 );
 

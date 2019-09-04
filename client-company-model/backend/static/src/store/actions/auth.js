@@ -22,13 +22,44 @@ export const authFail = error => {
 };
 
 export const logout = () => {
-  console.log("hereeee....");
   localStorage.removeItem("user");
   localStorage.removeItem("expirationDate");
   localStorage.setItem("token", null);
-  // axios.post("http://127.0.0.1:8000/rest-auth/logout/");
   return {
     type: actionTypes.AUTH_LOGOUT
+  };
+};
+
+export const resetPassword = email => {
+  const token = localStorage.getItem("token");
+  axios.post(
+    "http://127.0.0.1:8000/rest-auth/password/reset/",
+    {
+      email: email
+    },
+    {
+      headers: { Authorization: `Token ${token}` }
+    }
+  );
+  return {
+    type: actionTypes.AUTH_RESETPASSWORD
+  };
+};
+
+export const confirmPassword = (password1, password2) => {
+  const token = localStorage.getItem("token");
+  axios.post(
+    "http://127.0.0.1:8000/rest-auth/password/change/",
+    {
+      new_password1: password1,
+      new_password2: password2
+    },
+    {
+      headers: { Authorization: `Token ${token}` }
+    }
+  );
+  return {
+    type: actionTypes.AUTH_CONFIRMPASSWORD
   };
 };
 
@@ -50,6 +81,7 @@ export const authLogin = (username, password) => {
       })
       .then(res => {
         const token = res.data.key;
+        console.log(res.data);
         const expirationDate = new Date(new Date().getTime() + 3600 * 1000);
         localStorage.setItem("token", token);
         localStorage.setItem("expirationDate", expirationDate);
@@ -66,7 +98,7 @@ export const authSignup = (username, email, password1, password2) => {
   return dispatch => {
     dispatch(authStart());
     axios
-      .post("http:127.0.0.1:800/rest-auth/registration/", {
+      .post("http://127.0.0.1:8000/rest-auth/registration/", {
         username: username,
         email: email,
         password1: password1,

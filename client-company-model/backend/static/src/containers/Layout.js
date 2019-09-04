@@ -17,22 +17,32 @@ class CustomLayout extends React.Component {
       <Layout className="layout">
         <Header>
           <div className="logo" />
-          <Menu
-            theme="dark"
-            mode="horizontal"
-            defaultSelectedKeys={["2"]}
-            style={{ lineHeight: "64px" }}
-          >
-            {this.props.isAuthenticated ? (
-              <Menu.Item key="1" onClick={()=>this.props.logout()}>
+          {this.props.isAuthenticated ? (
+            <Menu
+              theme="dark"
+              mode="horizontal"
+              defaultSelectedKeys={["1"]}
+              style={{ lineHeight: "64px" }}
+            >
+              <Menu.Item key="1" onClick={() => this.props.logout()}>
                 Logout
               </Menu.Item>
-            ) : (
+              <Menu.Item key="2">
+                <Link to="/resetpassword">Reset Password</Link>
+              </Menu.Item>
+            </Menu>
+          ) : (
+            <Menu
+              theme="dark"
+              mode="horizontal"
+              defaultSelectedKeys={["1"]}
+              style={{ lineHeight: "64px" }}
+            >
               <Menu.Item key="1">
                 <Link to="/login">Login</Link>
               </Menu.Item>
-            )}
-          </Menu>
+            </Menu>
+          )}
         </Header>
 
         <Content style={{ padding: "0 50px" }}>

@@ -12,6 +12,10 @@ class RegistrationForm extends React.Component {
     this.state = {
       confirmDirty: false
     };
+    this.handleConfirmBlur = this.handleConfirmBlur.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.compareToFirstPassword = this.compareToFirstPassword.bind(this);
+    this.validateToNextPassword = this.validateToNextPassword.bind(this);
   }
 
   handleSubmit(e) {

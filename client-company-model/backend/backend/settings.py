@@ -138,13 +138,16 @@ STATIC_URL = '/static/'
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (
         # 'rest_framework.permissions.AllowAny',
-        'rest_framework.permissions.IsAuthenticated',
+        # 'rest_framework.permissions.IsAuthenticated',
 
     ),
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.TokenAuthentication',
-        # 'rest_framework.authentication.SessionAuthentication',
-        # 'rest_framework.authentication.BasicAuthentication',
+        # 'rest_framework.authenticat
+        # ion.SessionAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
+
+
     ),
 }
 
@@ -165,11 +168,21 @@ CORS_ALLOW_METHODS = (
     'OPTIONS'
 )
 
-
-ACCOUNT_EMAIL_VERIFICATION = 'none'
-
-ACCOUNT_AUTHENTICATION_METHOD = 'username'
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'leadbooktest@gmail.com'
+EMAIL_HOST_PASSWORD = 'fullstacktest'
 
 ACCOUNT_LOGOUT_ON_GET = True
 
 ACCOUNT_EMAIL_REQUIRED = False
+
+REST_SESSION_LOGIN = False
+
+
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+ACCOUNT_AUTHENTICATION_METHOD = 'user'
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_USERNAME_REQUIRED = False

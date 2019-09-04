@@ -15,14 +15,13 @@ class CsrfExemptSessionAuthentication(SessionAuthentication):
 
 
 class CompanyListView(ListAPIView):
-    # queryset = Company.objects.all()
     serializer_class = CompanySerializer
-    authentication_classes = (
-        CsrfExemptSessionAuthentication, BasicAuthentication)
 
     @csrf_exempt
     def get_queryset(self):
         user = self.request.user.id
+        # import pdb
+        # pdb.set_trace()
         print("USER LOGGED IN: " + str(user))
         queryset = Company.objects.values()
         for item in queryset:
