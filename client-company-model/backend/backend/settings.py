@@ -152,6 +152,8 @@ REST_FRAMEWORK = {
 }
 
 
+CSRF_COOKIE_NAME = "XSRF-TOKEN"
+
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]

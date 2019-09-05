@@ -13,16 +13,31 @@ class LikeBox extends React.Component {
   }
   handleClick() {
     const companyid = this.props.id;
+    const token = localStorage.getItem("token");
     if (this.state.status) {
       axios({
         method: "delete",
         url: `http://127.0.0.1:8000/api/delete/`,
+        headers: {
+          Authorization: `Token ${token}`,
+          xsrfHeaderName: "X-CSRFToken",
+          xsrfCookieName: "csrftoken"
+        },
+
         params: { companyid: companyid }
       }).then(res => {
         console.log(res.data);
       });
     } else {
-      axios.post(`http://127.0.0.1:8000/api/create/${this.props.id}`).then();
+      axios
+        .post(`http://127.0.0.1:8000/api/create/${this.props.id}`, {
+          headers: {
+            Authorization: `Token ${token}`,
+            xsrfCookieName: "csrftoken",
+            xsrfHeaderName: "X-CSRFToken"
+          }
+        })
+        .then();
     }
     let s = this.state.status;
     this.setState({

@@ -41,8 +41,8 @@ class CompanyDetailView(RetrieveAPIView):
 
 class CompanySearchView(ListAPIView):
     serializer_class = CompanySerializer
-    authentication_classes = (
-        CsrfExemptSessionAuthentication, BasicAuthentication)
+    # authentication_classes = (
+    #     CsrfExemptSessionAuthentication, BasicAuthentication)
 
     @csrf_exempt
     def get_queryset(self):
@@ -52,13 +52,12 @@ class CompanySearchView(ListAPIView):
         return queryset
 
 
-# @action(methods=['delete'], detail=False)
 class DeleteLikesView(DestroyAPIView):
 
     queryset = Likes.objects.all()
     serializer_class = LikesSerializer
-    authentication_classes = (
-        CsrfExemptSessionAuthentication, BasicAuthentication)
+    # authentication_classes = (
+    #     CsrfExemptSessionAuthentication, BasicAuthentication)
     lookup_fields = ['companyid']
 
     @csrf_exempt
@@ -74,9 +73,10 @@ class CreateLikesView(CreateAPIView):
 
     queryset = Likes.objects.all()
     serializer_class = LikesSerializer
-    authentication_classes = (
-        CsrfExemptSessionAuthentication, BasicAuthentication)
+    # authentication_classes = (
+    #     CsrfExemptSessionAuthentication, BasicAuthentication)
 
+    @csrf_exempt
     def create(self, request, *args, **kwargs):
         user = request.user
         company = Company.objects.get(id=self.kwargs['companyid'])
