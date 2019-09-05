@@ -15,7 +15,6 @@ class CompanyList extends React.Component {
 
   componentDidMount() {
     const token = localStorage.getItem("token");
-    console.log(token);
     axios
       .get("http://127.0.0.1:8000/api/", {
         headers: { Authorization: `Token ${token}` }
@@ -24,7 +23,6 @@ class CompanyList extends React.Component {
         this.setState({
           companies: res.data
         });
-        console.log(res.data);
       });
   }
 

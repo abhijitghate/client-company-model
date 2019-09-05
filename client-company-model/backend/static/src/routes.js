@@ -8,7 +8,7 @@ import Login from "./containers/Login";
 import Signup from "./containers/Signup";
 import ResetPassword from "./containers/ResetPassword";
 import ConfirmPassword from "./containers/ConfirmPassword";
-
+import FavouriteList from "./containers/FavouriteList";
 
 const BaseRouter = () => (
   <div>
@@ -23,7 +23,7 @@ const BaseRouter = () => (
     <Route exact path="/signup/" component={Signup}></Route>
     <Route exact path="/resetpassword/" component={ResetPassword}></Route>
     <Route exact path="/confirmpassword/" component={ConfirmPassword}></Route>
-
+    <Route exact path="/favouritelist/" component={FavouriteList}></Route>
   </div>
 );
 

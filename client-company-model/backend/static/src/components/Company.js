@@ -18,11 +18,14 @@ class Companies extends React.Component {
   render() {
     let companies;
     companies = this.props.data.map(function(key, value) {
-      console.log(key["liked"]);
       return (
         <Card title={key["name"]}>
           <p>{key["name"]}</p>
-          <LikeBox default={key["liked"]} id={key["id"]}></LikeBox>
+          <LikeBox
+            like_id={key["like_id"]}
+            default={key["liked"]}
+            id={key["id"]}
+          ></LikeBox>
         </Card>
       );
     });

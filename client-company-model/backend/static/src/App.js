@@ -17,7 +17,6 @@ class App extends React.Component {
     this.props.onTryAutoSignup();
   }
   render() {
-    console.log(this.props);
     return (
       <div>
         <Router>

@@ -143,16 +143,17 @@ REST_FRAMEWORK = {
     ),
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.TokenAuthentication',
-        # 'rest_framework.authenticat
-        # ion.SessionAuthentication',
+        # 'rest_framework.authentication.SessionAuthentication',
         'rest_framework.authentication.BasicAuthentication',
 
 
     ),
 }
 
+# CSRF_COOKIE_SECURE = True
 
-CSRF_COOKIE_NAME = "XSRF-TOKEN"
+
+CSRF_COOKIE_NAME = "csrftoken"
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
@@ -161,14 +162,30 @@ STATICFILES_DIRS = [
 
 CORS_ORIGIN_ALLOW_ALL = True
 
-CORS_ALLOW_METHODS = (
+CORS_ALLOW_METHODS = [
+    'DELETE',
     'GET',
+    'OPTIONS',
+    'PATCH',
     'POST',
     'PUT',
-    'PATCH',
-    'DELETE',
-    'OPTIONS'
-)
+]
+# CORS_ORIGIN_WHITELIST = (
+#     'http://127.0.0.1:8000',
+# )
+# CORS_ALLOW_HEADERS = (
+#     'accept',
+#     'accept-encoding',
+#     'authorization',
+#     'content-type',
+#     'dnt',
+#     'origin',
+#     'user-agent',
+#     'x-csrftoken',
+#     'xsrfCookieName',
+#     'xsrfHeaderName',
+#     'x-requested-with',
+# )
 
 # EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'

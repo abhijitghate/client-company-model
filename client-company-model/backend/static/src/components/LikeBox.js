@@ -2,6 +2,7 @@ import React from "react";
 import { Button } from "antd";
 
 import axios from "axios";
+axios.defaults.xsrfHeaderName = "X-CSRFToken";
 
 class LikeBox extends React.Component {
   constructor(props) {
@@ -13,31 +14,34 @@ class LikeBox extends React.Component {
   }
   handleClick() {
     const companyid = this.props.id;
+    const like_id = this.props.like_id;
     const token = localStorage.getItem("token");
     if (this.state.status) {
       axios({
-        method: "delete",
-        url: `http://127.0.0.1:8000/api/delete/`,
+        method: "DELETE",
+        url: `http://127.0.0.1:8000/api/${like_id}/delete/`,
         headers: {
           Authorization: `Token ${token}`,
-          xsrfHeaderName: "X-CSRFToken",
-          xsrfCookieName: "csrftoken"
-        },
-
-        params: { companyid: companyid }
+          xsrfCookieName: "csrftoken",
+          xsrfHeaderName: "X-CSRFToken"
+        }
       }).then(res => {
         console.log(res.data);
       });
     } else {
       axios
-        .post(`http://127.0.0.1:8000/api/create/${this.props.id}`, {
+        .post("http://127.0.0.1:8000/api/create/", {
+          params: { companyid },
           headers: {
-            Authorization: `Token ${token}`,
-            xsrfCookieName: "csrftoken",
-            xsrfHeaderName: "X-CSRFToken"
-          }
+            Authorization: `Token ${token}`
+          },
+          xsrfCookieName: "csrftoken",
+          xsrfHeaderName: "X-CSRFToken"
         })
-        .then();
+        .then(res => {
+          console.log("After create");
+          console.log(res.data);
+        });
     }
     let s = this.state.status;
     this.setState({
